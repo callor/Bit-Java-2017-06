@@ -12,14 +12,13 @@
 
 # Table 생성
 ### CREATE TABLE addrbook 
-“`
- create table addrbook ( // addrbook 테이블을 만들겠다
-    -> name varchar(10), // name field를 varchar 10글자 크기로 지정
-    -> tel varchar(15), // tel field를 varchar 15글자 크기로 지정
-    -> addr varchar(50), // addr field를 varchar(50)글자 크기로 지정
-    -> age int(5) // age field 정수 5자리크기로 지정
-    -> ) ;
-“`    
+
+- create table addrbook ( // addrbook 테이블을 만들겠다
+-    -> name varchar(10), // name field를 varchar 10글자 크기로 지정
+-    -> tel varchar(15), // tel field를 varchar 15글자 크기로 지정
+-    -> addr varchar(50), // addr field를 varchar(50)글자 크기로 지정
+-    -> age int(5) // age field 정수 5자리크기로 지정
+-    -> ) ;
     
  # Table 구조 확인
  

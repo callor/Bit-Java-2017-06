@@ -57,8 +57,8 @@
 * select * from addrbook where addr='광주광역시' or addr = '서울' ;
 
 # 데이터 수정(업데이트)
->UPDATE addrbook SET tel = '002' WHERE name = '홍길동' ;
->※ UDATE에서 조건을 생략하지 말것 !!
+ >UPDATE addrbook SET tel = '002' WHERE name = '홍길동' ;
+ >※ UDATE에서 조건을 생략하지 말것 !!
 
 * UPDATE addrbook SET tel = '002',addr='남원' , age=19  WHERE name = '이몽룡' ;
 

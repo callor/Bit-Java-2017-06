@@ -19,9 +19,6 @@ public class AddrDAO implements CRUD {
 	public void select() {
 		// TODO Auto-generated method stub
 
-//		dbConn.connect();
-		
-		
 		PreparedStatement pSt = null;
 		String sql = " SELECT * FROM addrbook ";
 		try {

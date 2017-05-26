@@ -10,3 +10,13 @@ CREATE TABLE buyer (
 	bupoint int DEFAULT 0, -- 포인트
 	PRIMARY KEY(id)
 );
+
+CREATE TABLE names (
+	id int NOT NULL auto_increment,
+	egname varchar(30),
+	hgname varchar(30),
+	means varchar(150),
+	
+	PRIMARY KEY(id)
+
+);

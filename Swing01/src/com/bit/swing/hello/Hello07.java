@@ -14,7 +14,7 @@ public class Hello07 {
 	JFrame jFr = new JFrame();
 	JPanel jPa = new JPanel();
 	int[] money = {50000,10000,5000,1000,500,100,50,10,5,1};
-	String[] mText = {"오만원","만원","천원",
+	String[] mText = {"오만원","만원","오천원","천원",
 				"500","100","50","10","5","1"};
 	JTextField sMoney ;
 	JTextField[] cMoney = new JTextField[money.length];
@@ -67,9 +67,11 @@ public class Hello07 {
 			String strMoney = sMoney.getText(); // TextField에 값을 가져오기
 			if(strMoney.length() == 0) return ; 
 			int intMoney = Integer.valueOf(strMoney); // 문자열을 정수로 변경
+			int rs = 0 ;
 			for(int i = 0 ;i<money.length;i++){
-				cMoney[i].setText(Integer.toString(intMoney/money[i])) ;
-				if(intMoney > 0) intMoney %= money[i] ;
+				rs = intMoney/money[i];
+				cMoney[i].setText(Integer.toString(rs)) ;
+				if(rs > 0) intMoney %= money[i] ;
 			}
 		}
 	}

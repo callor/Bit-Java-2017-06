@@ -16,6 +16,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import com.bit.frame.controller.MemberDAO;
+import com.bit.frame.model.MemberDTO;
+
 public class MemberJoin extends JFrame {
 
 	JPanel jPan1 = new JPanel();
@@ -27,6 +30,8 @@ public class MemberJoin extends JFrame {
 	JRadioButton rBtn1 = new JRadioButton("남자");
 	JRadioButton rBtn2 = new JRadioButton("여자");
 	JTextField txtTel = new JTextField(10);
+	
+	MemberDAO  memberDAO = new MemberDAO();
 	
 	public MemberJoin(){
 	
@@ -183,24 +188,55 @@ public class MemberJoin extends JFrame {
 				txtName.requestFocus(true);
 				return ;
 			}
-			if(txtPw.getText().isEmpty()){
+			
+			String strPw = new String(txtPw.getPassword()); // 알수없는 값
+			String strPw1 = new String(txtPw1.getPassword()); // 
+			
+//			if(txtPw.getText().isEmpty()){
+			if(strPw.isEmpty()) {
 				JOptionPane.showMessageDialog(jPan1, "비밀번호를 입력하세요");
 				txtPw.requestFocus(true);
 				return ;
 			}
-			if(txtPw1.getText().isEmpty()){
+//			if(txtPw1.getText().isEmpty()){
+			if(strPw1.isEmpty()){
 				JOptionPane.showMessageDialog(jPan1, "비밀번호 확인을 입력하세요");
 				txtPw1.requestFocus(true);
 				return ;
 			}
 			// 비밀번호입력과 확인 값이 서로 다르면
-			if(!txtPw.getText().equals(txtPw1.getText())) {
+//			if(!txtPw.getText().equals(txtPw1.getText())) {
+			if(!strPw.equals(strPw1)) {
 				JOptionPane.showMessageDialog(jPan1, "비밀번호 값이 다릅니다 확인하세요");
 				txtPw.setText(""); // TextFiel 내용을 삭제
 				txtPw1.setText("");
 				txtPw.requestFocus(true);
 				return ;
 			}
+			
+			// TextField에 입력한 값들을DTO에 복사
+			MemberDTO dto = new MemberDTO();
+			dto.setUserId(txtId.getText());
+			dto.setUserName(txtName.getText());
+//			dto.setUserPw(new String(txtPw.getPassword()));
+			dto.setUserPw(strPw);
+			
+			// 2개의 라디오 버튼 상태에 따라서 setUserSex값을 결정
+			if(rBtn1.isSelected()) dto.setUserSex("남자");// 남자가 선택
+			if(rBtn2.isSelected()) dto.setUserSex("여자");// 여자가 선택
+			dto.setUserTel(txtTel.getText());
+			
+			int ret = memberDAO.insert(dto);
+			if(ret > 0) {
+				JOptionPane.showMessageDialog(jPan1,
+						Integer.toString(ret)+" 개수가 정상적으로 추가 되었습니다");
+			} else {
+				JOptionPane.showMessageDialog(jPan1,
+						" 데이터 추가에 실패 했습니다.");
+				
+			}
+			
+			
 		}
 		
 	}

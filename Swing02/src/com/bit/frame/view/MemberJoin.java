@@ -32,14 +32,18 @@ public class MemberJoin extends JFrame {
 	JTextField txtTel = new JTextField(10);
 	
 	MemberDAO  memberDAO = new MemberDAO();
+	MemberList mList ;
 	
-	public MemberJoin(){
+	public MemberJoin(MemberList mList){
 	
 		int lableAlign = JLabel.RIGHT;
 		Color backColor = Color.LIGHT_GRAY;
 		
 		setTitle("회원가입");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
+		// 자기자신을 객체(object)로 등록
+		this.mList = mList ;
 		
 		// 회원가입 Title 표시부분
 		JLabel frmTitle = new JLabel("회원가입");
@@ -172,6 +176,8 @@ public class MemberJoin extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			
+
 			// TODO Auto-generated method stub
 			/***********************************
 			 * 필수입력 항목이 입력되지않으면 메시지를 보여준다.
@@ -179,6 +185,12 @@ public class MemberJoin extends JFrame {
 			// 회원 ID 를 입력하지 않았으면
 			if(txtId.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(txtId, "회원ID는 필수항목입니다");
+				txtId.requestFocus(true);
+				return ;
+			}
+			
+			if(memberDAO.searchID(txtId.getText()) > 0){
+				JOptionPane.showConfirmDialog(txtId, "이미 등록된 ID 입니다");
 				txtId.requestFocus(true);
 				return ;
 			}
@@ -233,9 +245,12 @@ public class MemberJoin extends JFrame {
 			} else {
 				JOptionPane.showMessageDialog(jPan1,
 						" 데이터 추가에 실패 했습니다.");
-				
 			}
 			
+//			MemberList mlist = new MemberList();
+			// 화면 리플레시
+			mList.jTableRefresh();
+			dispose(); //현재창 닫기
 			
 		}
 		
@@ -243,7 +258,7 @@ public class MemberJoin extends JFrame {
 	
 	
 	public static void main(String[] args) {
-		new MemberJoin();
+//		new MemberJoin();
 	}
 
 }
